@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chat Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Chat Room - Request & Response</h1>
+
+    <div class="alert alert-info">
+        Page loaded <span id="timeElapsed">0</span> seconds ago.
+    </div>
+
+    <!-- 채팅 메시지 리스트 -->
+    <div class="chat-messages">
+        <ul class="list-group">
+            <li th:each="chat : ${chats}" class="list-group-item">
+                <span th:text="${chat.message}">Message content here</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 채팅 메시지 작성 폼 -->
+    <div class="chat-input mt-4">
+        <form th:action="@{/chat}" method="post">
+            <div class="form-group">
+                <input type="text" name="msg" class="form-control" placeholder="Enter your message">
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+</div>
+<script>
+    let secondsElapsed = 0;
+    const timeElapsedElement = document.getElementById('timeElapsed');
+
+    // 매초마다 secondsElapsed 값을 증가시키고, 화면에 표시
+    setInterval(() => {
+        secondsElapsed++;
+        timeElapsedElement.textContent = secondsElapsed;
+    }, 1000);
+</script>
+</body>
+</html>
